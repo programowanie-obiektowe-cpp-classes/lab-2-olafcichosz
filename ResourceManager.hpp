@@ -24,22 +24,9 @@ public:
         return *this;
     }
 
-    // Konstruktor przenosz¹cy
-    ResourceManager(ResourceManager&& other) noexcept : resource(other.resource)
-    {
-        other.resource = nullptr; // ustaw wskaŸnik w drugim obiekcie na nullptr
-    }
-
-    // Operator przypisania przenosz¹cy
-    ResourceManager& operator=(ResourceManager&& other) noexcept
-    {
-        if (this != &other) {
-            delete resource;                 // zwolnij obecny zasób
-            resource       = other.resource; // przenieœ zasób
-            other.resource = nullptr;        // ustaw wskaŸnik w drugim obiekcie na nullptr
-        }
-        return *this;
-    }
+    // Usuwamy semantykê przenoszenia
+    ResourceManager(ResourceManager&&) = delete;
+    ResourceManager& operator=(ResourceManager&&) = delete;
 
     // Destruktor: zwalnia zarz¹dzany zasób
     ~ResourceManager() { delete resource; }
